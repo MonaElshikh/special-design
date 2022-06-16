@@ -25,7 +25,7 @@ function toggleSettingsBox() {
         document.querySelector(".setting-icon .gear").classList.toggle("rotate");
     });
 }
-// funtion to load the current color stored in local storage
+// funtion to load the user default options from local storage
 function loadDefaultOptions() {
     // 1- Color Option
     // check local storage for default color
@@ -65,7 +65,7 @@ function loadDefaultOptions() {
         toggleLandingImages();
     }
 }
-// funtion to enable user to toggle color.
+// funtion to enable user to toggle color option.
 function toggleColorList() {
     colors.forEach(color => {
         color.addEventListener("click", (e) => {
@@ -166,11 +166,23 @@ function openGalleryImgPopup() {
 // function to close popups
 function closePopups() {
     document.addEventListener("click", (e) => {
+        // close gallery image popup when clicking on close button
         if (e.target.className === "close") {
             e.target.parentNode.parentNode.remove();
         }
+        // close gallery image popup when clicking outsid.
         else if (e.target.className === "modal") {
             e.target.remove();
+        }
+        // close settings box if clicked anywhere outside
+        else {
+            e.target.className !== "main" &&
+                (e.target.classList.contains("settings")
+                    || e.target.parentNode.classList.contains("settings")
+                    || e.target.parentNode.parentNode.classList.contains("settings")
+                    || e.target.parentNode.parentNode.parentNode.classList.contains("settings"))
+                ? ""
+                : settingsBox.classList.remove("show");
         }
     });
 }
