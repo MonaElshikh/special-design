@@ -103,7 +103,7 @@ function toggleLandingImages() {
         // get random number within array lenght
         randonNo = Math.floor(Math.random() * landingImgs.length);
         // set the landing section background to a random image to be change every 5 seconds
-        landingSection.style.backgroundImage = 'url("/imgs/' + landingImgs[randonNo] + '")';
+        landingSection.style.backgroundImage = 'url("/imgs/landing/' + landingImgs[randonNo] + '")';
     }, 5000);
 }
 // function to stop random background images for landing section
