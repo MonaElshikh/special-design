@@ -1,22 +1,96 @@
 //#region Declaration
-const colors = document.querySelectorAll(".colors-list li");
-const randomButtons = document.querySelectorAll(".random-btns span");
+const rootElement = document.documentElement;
+
 const settingIcon = document.querySelector(".setting-icon");
 const settingsBox = document.querySelector(".settings");
+const colors = Array.from(document.querySelectorAll(".colors-list li"));
+const randomButtons = Array.from(document.querySelectorAll("#bg-btns span"));
+const navBulletsContainer = document.querySelector(".nav-bullets");
+const navBulletsButtons = Array.from(document.querySelectorAll("#bullets-btns span"));
+const navBullets = Array.from(document.querySelectorAll(".nav-bullets .bullet "));
+const navLinks = Array.from(document.querySelectorAll(".links a"));
+
 const landingSection = document.querySelector(".landing");
 const landingImgs = ["wallpaper-1.jpg", "wallpaper-2.jpg", "wallpaper-3.jpg", "wallpaper-4.jpg", "wallpaper-5.jpg"];
-const rootElement = document.documentElement;
 const skillsSection = document.querySelector(".skills");
-const skillsProgress = document.querySelectorAll(".skill-progress span");
+const skillsProgress = Array.from(document.querySelectorAll(".skill-progress span"));
+const resetButton = document.querySelector(".reset");
 let upLink = document.querySelector("body > a");
 let randonNo;
 let interval;
 //#endregion
 
 //#region Functions
-// funtion to remove active class from all elements inside the givin list.
-function reset(list) {
+// funtion to reset active class from all elements inside the givin list and set it for the givin item.
+function resetActiveStyle(list, e) {
     list.forEach((item) => item.classList.remove("active"));
+    e ? e.classList.add("active") : "";
+}
+// function to reset all options in settings box
+function resetOptions() {
+    resetButton.addEventListener("click", () => {
+        localStorage.removeItem("color-option");
+        localStorage.removeItem("randomBg-option");
+        localStorage.removeItem("navBullets-option");
+        loadDefaultOptions();
+    });
+}
+// function to set local storage values
+function setLocalStorage(key, value) {
+    localStorage.setItem(key, value);
+}
+// function to get local storage values
+function getLocalStorage(key) {
+    return localStorage.getItem(key);
+}
+// funtion to load user default options from local storage
+function loadDefaultOptions() {
+    // 1- Color Option
+    // check local storage for default color
+    let colorMode = getLocalStorage("color-option");
+    if (colorMode) {
+        // set current color from local storage
+        rootElement.style.setProperty("--main-color", colorMode);
+        resetActiveStyle(colors, colors.filter(color => color.dataset.color === colorMode)[0]);
+    }
+    else {
+        rootElement.style.setProperty("--main-color", "#2196f3");
+        resetActiveStyle(colors, colors[0]);
+    }
+    // 2- Random background option
+    let toggleImage = getLocalStorage("randomBg-option");
+    if (toggleImage) {
+        switch (toggleImage) {
+            case "yes":
+                resetActiveStyle(randomButtons, randomButtons[0]);
+                toggleLandingImages();
+                break;
+            case "no":
+                resetActiveStyle(randomButtons, randomButtons[1]);
+                stopToggleLandingImages();
+                break;
+        }
+    }
+    else {
+        toggleLandingImages();
+    }
+    //  3- Show/Hide nav bullets
+    let toggleBullets = getLocalStorage("navBullets-option");
+    if (toggleBullets) {
+        switch (toggleBullets) {
+            case "yes":
+                resetActiveStyle(navBulletsButtons, navBulletsButtons[0]);
+                navBulletsContainer.style.display = "block";
+                break;
+            case "no":
+                resetActiveStyle(navBulletsButtons, navBulletsButtons[1]);
+                navBulletsContainer.style.display = "none";
+                break;
+        }
+    }
+    else {
+        navBulletsContainer.style.display = "block";
+    }
 }
 // funtion to show/hide setting box
 function toggleSettingsBox() {
@@ -25,75 +99,33 @@ function toggleSettingsBox() {
         document.querySelector(".setting-icon .gear").classList.toggle("rotate");
     });
 }
-// funtion to load the user default options from local storage
-function loadDefaultOptions() {
-    // 1- Color Option
-    // check local storage for default color
-    let colorMode = localStorage.getItem("color-option");
-    if (colorMode) {
-        // set current color from local storage
-        rootElement.style.setProperty("--main-color", colorMode);
-        colors.forEach(color => {
-            // clear active class
-            color.classList.remove("active");
-            // if the clicked color match the stored on set the color bullet to active
-            if (color.dataset.color === colorMode) {
-                color.classList.add("active");
-            }
-        })
-    }
-    else {
-        rootElement.style.setProperty("--main-color", "#2196f3");
-    }
-    // 2- Random background option
-    let toggleImage = localStorage.getItem("randomBg-option");
-    if (toggleImage) {
-        switch (toggleImage) {
-            case "yes":
-                toggleLandingImages();
-                reset(randomButtons);
-                randomButtons[0].classList.add("active");
-                break;
-            case "no":
-                stopToggleLandingImages();
-                reset(randomButtons);
-                randomButtons[1].classList.add("active");
-                break;
-        }
-    }
-    else {
-        toggleLandingImages();
-    }
-}
 // funtion to enable user to toggle color option.
 function toggleColorList() {
     colors.forEach(color => {
         color.addEventListener("click", (e) => {
-            // set main color to chosen one
+            resetActiveStyle(colors, e.target);
             rootElement.style.setProperty("--main-color", e.target.dataset.color);
-            // reset all colors to be in active
-            reset(colors);
-            // colors.forEach(c => c.classList.remove("active"));
-            // make the cliked color active
-            color.classList.add("active");
-            // save the chosen color to local storage.
-            localStorage.setItem("color-option", e.target.dataset.color);
+            setLocalStorage("color-option", e.target.dataset.color);
         });
     });
 }
 // function to enable user to toggle random backgroun option
 function toggleBackground() {
     randomButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            reset(randomButtons);
-            button.classList.add("active");
-            if (button.innerHTML === "Yes") {
-                toggleLandingImages();
-                localStorage.setItem("randomBg-option", "yes");
-            } else {
-                stopToggleLandingImages();
-                localStorage.setItem("randomBg-option", "no");
-            }
+        button.addEventListener("click", (e) => {
+            resetActiveStyle(randomButtons, e.target);
+            setLocalStorage("randomBg-option", button.innerHTML.toLowerCase());
+            button.innerHTML === "Yes" ? toggleLandingImages() : stopToggleLandingImages();
+        });
+    });
+}
+// function to enable user toggle showing nav bullets
+function toggleNavBullets() {
+    navBulletsButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            resetActiveStyle(navBulletsButtons, e.target);
+            setLocalStorage("navBullets-option", button.innerHTML.toLowerCase());
+            button.innerHTML === "Yes" ? navBulletsContainer.style.display = "block" : navBulletsContainer.style.display = "none";
         });
     });
 }
@@ -133,7 +165,6 @@ function animateSkills() {
 // function to open popup for each gallery img on click
 function openGalleryImgPopup() {
     let imges = document.querySelectorAll(".imges-box img");
-    // console.log(imges);
     imges.forEach(img => {
         img.addEventListener("click", (e) => {
             // create the modal popup
@@ -186,6 +217,16 @@ function closePopups() {
         }
     });
 }
+// function to navigate to any page sections via bullets or top links
+function navigateSections(list) {
+    list.forEach((element) => {
+        // on click go to the section using scrollIntoView api with smooth behavior.
+        element.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.querySelector(e.target.dataset.section).scrollIntoView({ behavior: "smooth" });
+        });
+    });
+}
 //#endregion
 
 //#region Calls
@@ -193,7 +234,11 @@ loadDefaultOptions();
 toggleSettingsBox();
 toggleColorList();
 toggleBackground();
+toggleNavBullets();
 animateSkills();
 openGalleryImgPopup();
 closePopups();
+navigateSections(navLinks);
+navigateSections(navBullets);
+resetOptions();
 //#endregion

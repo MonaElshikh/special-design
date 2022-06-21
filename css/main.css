@@ -35,6 +35,7 @@ body > a {
     border: solid 1px var(--main-color);
     border-radius: var(--border-radius);
     position: fixed;
+    z-index: 3;
     bottom: 5px;
     right: 5px;
   }
@@ -57,6 +58,7 @@ h2 {
     margin: 0 0 30px;
     font-weight: bold;
     text-align: center;
+    letter-spacing: 3px;
 }
 .container {
     padding-inline: 15px;
@@ -65,8 +67,8 @@ h2 {
     margin: auto;
 }
 /************************************* End Global *************************************/
-
-/************************************* Start Modal popup *************************************/
+/************************************** Start Components ******************************/
+/* 1- Start Modal popup */
 .modal {
     position: fixed;
     top:0;
@@ -106,17 +108,17 @@ h2 {
     cursor: pointer;
     text-align: center;
 }
-/************************************* End Modal popup *************************************/
-
-/************************************* Start Settings *************************************/
+/* End Modal popup */
+/* 2- Start Settings box**/
 .settings {
     min-height: 100vh;
     position: fixed;
     width: 230px;
-    z-index: 1000;
+    z-index: 3;
     background-color: var(--white-color);
     transition: var(--transition);
     left: -230px;
+    border: solid 1px #f6f6f6;
 }
 .settings.show {
     left: 0;
@@ -186,7 +188,7 @@ h2 {
     align-items: center;
 }
 /* random background option */
-.random-btns > span {
+.random-btns > span,#btnReset {
     display: inline-block;
     margin: 0 15px;
     background-color: var(--main-color);
@@ -200,7 +202,73 @@ h2 {
 .random-btns > span.active {
     opacity: 1;
 }
-/************************************* End Settings  *************************************/
+.reset {
+    display: block;
+    width: 208px;
+    text-align: center;
+    opacity: 1;
+    margin: 15px 10px;
+    background-color: #e24a3e;
+    color: var(--white-color);
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    cursor: pointer;
+}
+/* End Settings */
+/* 3- Start nav-bullets*/
+.nav-bullets {
+    position: fixed;
+    right: 0;
+    top:50%;
+    transform: translateY(-50%);
+    width: 60px;
+    z-index: 3;
+    transition: var(--transition);
+}
+.bullet {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin: 20px auto;
+    border: solid 3px var(--main-color);
+    border-radius: var(--circle-border);
+    cursor: pointer;
+    transition: var(--transition);
+}
+.bullet:hover .tooltip {
+    display: block;
+}
+.tooltip {
+    position: absolute;
+    right: 30px;
+    top: -9px;
+    width: 110px;
+    padding: 7px;
+    margin: auto;
+    text-align: center;
+    border-radius: var(--border-radius);
+    background-color: var(--main-color);
+    color: var(--white-color);
+    cursor: default;
+    pointer-events: none;
+    display: none;
+}
+.tooltip::after  {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top:50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--main-color);
+  
+}
+/* End nav-bullets */
+
 /************************************* Start Landing *************************************/
 .landing {
     min-height: 100vh;
@@ -216,7 +284,7 @@ h2 {
     height: 100%;
     top:0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
 }
 .header {
     position: relative;
@@ -361,7 +429,7 @@ h2 {
     padding: 3px;
     margin: 5px;
     background-color: var(--light-bg);
-    border:solid 1px var(--gray-color);
+    border:solid 1px var(--main-color);
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: var(--transition);
@@ -475,25 +543,24 @@ h2 {
 }
 .features .container {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 .feat-box {
     padding: 10px;
-    width: 350px;
-    margin-bottom: 30px;
+    width: 220px;
+    margin: 10px;
     background-color: var(--light-bg);
     border-radius: var(--border-radius);
     transition: var(--transition);
+    border:solid 1px var(--main-color);
 }
 .feat-box:hover {
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 .feat-box img {
     width: 100%;
-    height: 200px;
-    max-width: 100%;
+    height: 100px;
 }
 .feat-box h4 { 
     color: var(--main-color);
@@ -540,7 +607,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 .ts-box {
     position: relative;
@@ -549,7 +616,7 @@ h2 {
     padding:10px 15px;
     background-color: var(--white-color);
     border-radius: var(--border-radius);
-    margin-bottom: 15px;
+    margin: 15px;
    
 }
 .ts-box > q {
