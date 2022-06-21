@@ -54,11 +54,11 @@ a {
 }
 h2 {
     color:var(--main-color);
-    font-size: 35px;
-    margin: 0 0 30px;
+    font-size: 40px;
+    margin: 0 0 40px;
     font-weight: bold;
-    text-align: center;
     letter-spacing: 3px;
+    text-align: center;
 }
 .container {
     padding-inline: 15px;
@@ -322,7 +322,7 @@ h2 {
     transform: translate(-50%,-50%);
     text-align: center;
     color:var(--white-color);
-    width: 100%;
+    max-width: 100%;
     z-index: 2;
 }
 .content > p {
@@ -541,7 +541,7 @@ h2 {
     padding-top: var(--main-padding);
     padding-bottom: var(--main-padding);
 }
-.features .container {
+.features .feat-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -599,7 +599,6 @@ h2 {
     z-index: 2;
     position: relative;
     color: var(--white-color);
-    text-align: left;
 }
 .testimonials-content {
     position: relative;
@@ -647,3 +646,77 @@ h2 {
     color: var(--gray-color);
 }
 /*************************************** End Testimonial ********************************/
+/* Start Contact */
+.contact {
+    position: relative;
+    padding-top: var(--main-padding);
+    padding-bottom: var(--main-padding);
+    background-image:url("/imgs/world-map.webp") ;
+}
+.contact .overly {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+    background-color: var(--main-color);
+    opacity: .1;
+}
+.contact .container {
+    position: relative;
+    z-index: 1;
+}
+/* End Contact */
+.contact form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+ form .form-info , 
+ form .form-submit {
+    width: 48%;
+    margin: 0 5px;
+}
+form textarea, input:not([type="submit"]) {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    border: solid 1px var(--gray-color);
+}
+form input {
+    height: 40px;
+}
+form textarea {
+    height: 140px;
+    margin-bottom: 8px;
+}
+form input[type="submit"]{
+    display: block;
+    background-color: var(--main-color);
+    color: var(--white-color);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: transparent;
+    width: 100%;
+    cursor: pointer;
+}
+form textarea:focus, 
+input:not([type="submit"]):focus {
+    outline: solid 1px var(--main-color);
+}
+form textarea:focus::placeholder , 
+input:not([type="submit"]):focus::placeholder { 
+opacity: 0;
+transition: var(--transition);
+}
+form textarea:focus::-webkit-input-placeholder , 
+input:not([type="submit"]):focus::-webkit-input-placeholder { 
+    opacity: 0;
+    transition: var(--transition);
+}
+form textarea:focus:-ms-input-placeholder , 
+input:not([type="submit"]):focus:-ms-input-placeholder { 
+opacity: 0;
+transition: var(--transition);
+}
