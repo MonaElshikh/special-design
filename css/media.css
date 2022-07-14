@@ -1,5 +1,88 @@
 /* Start Media Queries -Grid system-*/
 
+/* small phones screen */
+@media (max-width:575px) {
+    .content h1 {
+        font-size: 22px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    .about {
+        display: block;
+        text-align: center;
+    }
+    .info-box {
+        padding: 0 !important;
+    }
+    .modal-content {
+        width:92%;
+    }
+    .skill-box {
+        display: block !important;
+    }
+    .skill-name {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+    .timeline-left , 
+    .timeline-right  {
+       width: 100% !important;
+    }
+    .timeline-left::before ,
+    .timeline-right::before
+    {
+      display: none !important;
+    }
+    .timeline-left::after ,
+    .timeline-right::after {
+        display: none !important;
+     }
+     .feat-box {
+        width: 360px!important;
+     }
+     .form-info,.form-submit {
+        width: 95% !important;
+    }
+}
+@media (max-width:767px) {
+    .about {
+        display: block;
+        text-align: center;
+    }
+    .info-box {
+        padding: 0 !important;
+    }
+    .modal-content {
+        width:92%;
+    }
+    .skill-box {
+        display: block !important;
+    }
+    .skill-name {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+    .timeline-left , 
+    .timeline-right  {
+      width: 100% !important;
+    }
+    .timeline-left::before ,
+    .timeline-right::before
+    {
+       display: none !important;
+    }
+    .timeline-left::after ,
+    .timeline-right::after {
+        display: none !important;
+     }
+     .feat-box {
+        width: 360px!important;
+     }
+     .form-info,.form-submit {
+        width: 95% !important;
+    }
+}
 /* Small devices > phones */
 @media (min-width:576px) {
     .container { 
@@ -53,16 +136,14 @@
     }
     .links.open li {
         display: block;
-        margin: 10px 8px;
-        padding: 3px;
+        margin: 5px 10px;
+        padding: 3px 0px 5px 3px;
+    }
+    .links.open li:not(:last-child){
+        border-bottom: solid 1px var(--main-color);
     }
     .links.open  li a {
         color: var(--main-color);
     }
-    .content {
-        width: 100%;
-    }
-    .content h1 {
-        font-size: 30px;
-    }
+   
 }

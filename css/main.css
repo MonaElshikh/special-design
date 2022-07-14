@@ -114,7 +114,7 @@ h2 {
     min-height: 100vh;
     position: fixed;
     width: 230px;
-    z-index: 3;
+    z-index: 4;
     background-color: var(--white-color);
     transition: var(--transition);
     left: -230px;
@@ -286,13 +286,17 @@ h2 {
     left: 0;
     z-index: 2;
 }
+.landing .container {
+    position: relative;
+    z-index: 3;
+}
 .header {
     position: relative;
     display: flex;
     justify-content: space-between;
     padding: 25px;
     color: var(--white-color);
-    z-index: 3;
+    z-index: 2;
 }
 .logo {
     font-weight: bold;
@@ -353,7 +357,7 @@ position: relative;
     transform: translate(-50%,-50%);
     text-align: center;
     color:var(--white-color);
-    max-width: 100%;
+    width: 95%;
     z-index: 2;
 }
 .content > p {
@@ -385,7 +389,6 @@ position: relative;
 .about .info-box h2 {
     color: var(--main-color);
     margin: 0 0 10px;
-    text-align: left;
 }
 .about .info-box p {    
     line-height: 1.6;
@@ -424,7 +427,7 @@ position: relative;
     margin-bottom: 15px;
 }
 .skill-box .skill-name {
-    width: 120px;
+    width: 140px;
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
@@ -454,9 +457,10 @@ position: relative;
 }
 .gallery .imges-box {
     text-align: center;
+    display: inline-block;
 }
 .imges-box img {
-    width: 200px;
+    width: 295px;
     padding: 3px;
     margin: 5px;
     background-color: var(--light-bg);
@@ -579,7 +583,7 @@ position: relative;
 }
 .feat-box {
     padding: 10px;
-    width: 220px;
+    width: 290px;
     margin: 10px;
     background-color: var(--light-bg);
     border-radius: var(--border-radius);
@@ -641,7 +645,7 @@ position: relative;
 }
 .ts-box {
     position: relative;
-    width: 350px;
+    width: 430px;
     max-width: 100%;
     padding:10px 15px;
     background-color: var(--white-color);
@@ -677,7 +681,7 @@ position: relative;
     color: var(--gray-color);
 }
 /*************************************** End Testimonial ********************************/
-/* Start Contact */
+/*************************************** Start Contact **********************************/
 .contact {
     position: relative;
     padding-top: var(--main-padding);
@@ -751,3 +755,21 @@ input:not([type="submit"]):focus:-ms-input-placeholder {
 opacity: 0;
 transition: var(--transition);
 }
+/*************************************** Start Contact **********************************/
+/*************************************** Start Footer **********************************/
+.footer {
+    background-color: var(--black-color);
+    color: var(--light-bg);
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+}
+.footer img {
+    width: 20px;
+}
+.footer span {
+    color: var(--main-color);
+}
+/*************************************** Start Footer **********************************/
+

@@ -99,14 +99,14 @@ function loadDefaultOptions() {
 // funtion to show/hide setting box
 function toggleSettingsBox() {
     settingIcon.addEventListener("click", (e) => {
-        // make header under settings box
-        header.style.zIndex = "2";
         // close top menu if open
         if (linksContainer.classList.contains("open")) {
             showHideMenu();
         }
         // show settings panel
         settingsBox.classList.toggle("show");
+        //prevent clciking on child elements
+        settingsBox.onclick = (e) => e.stopPropagation();
         // rotate settings icon
         document.querySelector(".setting-icon .gear").classList.toggle("rotate");
     });
@@ -197,6 +197,7 @@ function openGalleryImgPopup() {
             // create modal image
             let modalImage = document.createElement("img");
             modalImage.src = e.target.src;
+            modalImage.style.width = "100%";
             // append elements to parents
             modalContent.appendChild(modalHeader);
             modalContent.appendChild(closeButton);
@@ -218,21 +219,15 @@ function closePopups() {
             e.target.remove();
         }
         // close settings box if clicked anywhere outside
-        else {
-            e.target.className !== "main" &&
-                (e.target.classList.contains("settings")
-                    || e.target.parentNode.classList.contains("settings")
-                    || e.target.parentNode.parentNode.classList.contains("settings")
-                    || e.target.parentNode.parentNode.parentNode.classList.contains("settings"))
-                ? ""
-                : settingsBox.classList.remove("show");
-
-            // close top menu 
-            if (e.target !== toggleBtn && e.target.parentNode !== linksContainer) {
-                if (linksContainer.classList.contains("open")) {
-                    showHideMenu();
-                }
-            }
+        else if (e.target !== settingsBox && settingsBox.classList.contains("show")) {
+            // console.log("out sid settings box");
+            settingsBox.classList.remove("show");
+        }
+        // close top menu 
+        else if (e.target !== toggleBtn
+            && e.target.parentNode !== linksContainer
+            && linksContainer.classList.contains("open")) {
+            showHideMenu();
         }
     });
 }
@@ -259,8 +254,11 @@ function showHideMenu() {
 function toggleMenu() {
     toggleBtn.onclick = function (e) {
         e.stopPropagation(); // prevent clicking on chiled elements inside the main.
+        // close settings panel if open
+        if (settingsBox.classList.contains("show")) {
+            settingsBox.classList.toggle("show");
+        }
         showHideMenu();
-        header.style.zIndex = "3";
     };
     linksContainer.onclick = function (e) {
         e.stopPropagation(); // prevent clicking on chiled elements inside the main.
