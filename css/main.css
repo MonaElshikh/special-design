@@ -292,7 +292,7 @@ h2 {
     justify-content: space-between;
     padding: 25px;
     color: var(--white-color);
-    z-index: 2;
+    z-index: 3;
 }
 .logo {
     font-weight: bold;
@@ -306,6 +306,12 @@ h2 {
 .logo:hover{
     text-shadow: 0 0 5px var(--main-color);
 }
+.links-container {
+    text-align: right;
+}
+.links {
+    display: none;
+}
 .links > li {
     margin-left: 15px;
     cursor: pointer;
@@ -314,6 +320,31 @@ h2 {
 .links > li a:hover ,
 .links > li a.active  {
     color: var(--main-color);
+}
+.toggle-menu {
+background: none;
+border: none;
+width: 50px;
+cursor: pointer;
+position: relative;
+}
+.toggle-menu.active-menu::before {
+    content: '';
+    position: absolute;
+    top: 23px;
+    left: 16px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: transparent transparent var(--white-color) transparent;
+}
+.toggle-menu:focus {
+    outline: none;
+}
+.toggle-menu span {
+    display: block;
+    margin-bottom: 7px;
+    height: 4px;
+    background-color: var(--white-color);
 }
 .content {
     position: absolute;

@@ -1,6 +1,10 @@
 //#region Declaration
 const rootElement = document.documentElement;
 
+const header = document.querySelector(".header");
+const toggleBtn = document.querySelector(".toggle-menu");
+const linksContainer = document.querySelector(".links");
+
 const settingIcon = document.querySelector(".setting-icon");
 const settingsBox = document.querySelector(".settings");
 const colors = Array.from(document.querySelectorAll(".colors-list li"));
@@ -95,7 +99,15 @@ function loadDefaultOptions() {
 // funtion to show/hide setting box
 function toggleSettingsBox() {
     settingIcon.addEventListener("click", (e) => {
+        // make header under settings box
+        header.style.zIndex = "2";
+        // close top menu if open
+        if (linksContainer.classList.contains("open")) {
+            showHideMenu();
+        }
+        // show settings panel
         settingsBox.classList.toggle("show");
+        // rotate settings icon
         document.querySelector(".setting-icon .gear").classList.toggle("rotate");
     });
 }
@@ -214,6 +226,13 @@ function closePopups() {
                     || e.target.parentNode.parentNode.parentNode.classList.contains("settings"))
                 ? ""
                 : settingsBox.classList.remove("show");
+
+            // close top menu 
+            if (e.target !== toggleBtn && e.target.parentNode !== linksContainer) {
+                if (linksContainer.classList.contains("open")) {
+                    showHideMenu();
+                }
+            }
         }
     });
 }
@@ -223,9 +242,29 @@ function navigateSections(list) {
         // on click go to the section using scrollIntoView api with smooth behavior.
         element.addEventListener("click", (e) => {
             e.preventDefault();
+            // close top menu if open
+            if (linksContainer.classList.contains("open")) {
+                showHideMenu();
+            }
             document.querySelector(e.target.dataset.section).scrollIntoView({ behavior: "smooth" });
         });
     });
+}
+// function to show and hide the top menu links
+function showHideMenu() {
+    linksContainer.classList.toggle("open");
+    toggleBtn.classList.toggle("active-menu");
+}
+// function to toggle top menu bwtween diffrenet screens
+function toggleMenu() {
+    toggleBtn.onclick = function (e) {
+        e.stopPropagation(); // prevent clicking on chiled elements inside the main.
+        showHideMenu();
+        header.style.zIndex = "3";
+    };
+    linksContainer.onclick = function (e) {
+        e.stopPropagation(); // prevent clicking on chiled elements inside the main.
+    }
 }
 //#endregion
 
@@ -241,4 +280,5 @@ closePopups();
 navigateSections(navLinks);
 navigateSections(navBullets);
 resetOptions();
+toggleMenu();
 //#endregion

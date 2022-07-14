@@ -1,0 +1,68 @@
+/* Start Media Queries -Grid system-*/
+
+/* Small devices > phones */
+@media (min-width:576px) {
+    .container { 
+        width: 540px;
+    }
+}
+/* Medium devices > tablets */
+@media (min-width:768px) {
+    .container { 
+        width: 720px;
+    }
+}
+/* Desktop */
+@media (min-width:992px) {
+    .container { 
+        width: 960px;
+    }
+    .links {
+        display: inline-block;
+        cursor: pointer;
+    }
+    .toggle-menu {
+        display: none;
+    }
+}
+/* Large screens */
+@media (min-width:1200px) {
+    .container { 
+        width: 1140px;
+    }
+    .links {
+        display: inline-block;
+    }
+    .toggle-menu {
+        display: none;
+    }
+}
+/* toggle menu media */
+@media (max-width:991px) {
+    .links.open {
+        background-color: var(--white-color);
+        position: absolute;
+        display: block;
+        width: 100%;
+        left: 0;
+        top: 67px;
+        text-align: left;
+        font-weight: bold;
+        border-radius: var(--border-radius);
+        z-index: 3;
+    }
+    .links.open li {
+        display: block;
+        margin: 10px 8px;
+        padding: 3px;
+    }
+    .links.open  li a {
+        color: var(--main-color);
+    }
+    .content {
+        width: 100%;
+    }
+    .content h1 {
+        font-size: 30px;
+    }
+}

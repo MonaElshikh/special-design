@@ -8,6 +8,12 @@
     <link rel="icon" type="image/svg" href="imgs/favicon.svg" />
     <link rel="stylesheet" href="css/normalize.mini.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link
+      rel="preload"
+      href="css/media.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -79,17 +85,24 @@
         <div class="container">
           <div class="header" id="header">
             <div class="logo">Special Design</div>
-            <ul class="links">
-              <li>
-                <a href="#" data-section="#about" class="active">About</a>
-              </li>
-              <li><a href="#" data-section="#skills">Skills</a></li>
-              <li><a href="#" data-section="#gallery">Gallery</a></li>
-              <li><a href="#" data-section="#timeline">Timeline</a></li>
-              <li><a href="#" data-section="#features">Features</a></li>
-              <li><a href="#" data-section="#testimonial">Testimonial</a></li>
-              <li><a href="#" data-section="#contact">Contact</a></li>
-            </ul>
+            <div class="links-container">
+              <ul class="links">
+                <li>
+                  <a href="#" data-section="#about" class="active">About</a>
+                </li>
+                <li><a href="#" data-section="#skills">Skills</a></li>
+                <li><a href="#" data-section="#gallery">Gallery</a></li>
+                <li><a href="#" data-section="#timeline">Timeline</a></li>
+                <li><a href="#" data-section="#features">Features</a></li>
+                <li><a href="#" data-section="#testimonial">Testimonial</a></li>
+                <li><a href="#" data-section="#contact">Contact</a></li>
+              </ul>
+              <button class="toggle-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
           </div>
         </div>
         <div class="content">
